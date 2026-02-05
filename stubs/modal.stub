@@ -1,0 +1,51 @@
+<?php
+
+namespace {{ namespace }};
+
+use Repay\Modal\Livewire\Modals\BaseModal;
+
+class {{ class }} extends BaseModal
+{
+    /**
+     * Setup the modal with parameters
+     */
+    protected function setupModal(array $params): void
+    {
+        // Example: $this->userId = $params['userId'] ?? null;
+        // $this->title = $params['title'] ?? '{{ class }}';
+        // $this->size = $params['size'] ?? 'md';
+    }
+
+    /**
+     * Example form submission
+     */
+    public function submit(): void
+    {
+        // Your logic here
+        // Example: User::find($this->userId)->update([...]);
+        
+        $this->dispatch('{{ view }}-submitted', data: []); // Optional: dispatch event
+        $this->closeModal();
+    }
+
+    /**
+     * Example method to open nested modal
+     */
+    public function openChildModal(): void
+    {
+        $this->openNestedModal(
+            component: \App\Livewire\Modals\AnotherModal::class, // Change this
+            params: [
+                'parentId' => $this->userId ?? null,
+            ]
+        );
+    }
+
+    /**
+     * Render the modal view
+     */
+    public function render()
+    {
+        return view('livewire.modals.{{ view }}');
+    }
+}
